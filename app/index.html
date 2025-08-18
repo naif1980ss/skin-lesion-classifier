@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Skin Lesion Classifier</title>
+  <style>
+    body { font-family: Inter, system-ui, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    header { margin-bottom: 24px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 14px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+    .row { display: flex; gap: 12px; align-items: center; }
+    .btn { padding: 10px 14px; border-radius: 10px; border: 1px solid #111827; background: #111827; color: white; cursor: pointer; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    pre { background: #0b1021; color: #d1d5db; padding: 14px; border-radius: 12px; overflow: auto; }
+    .result { margin-top: 16px; }
+    .top { font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Skin Lesion Classifier</h1>
+    <p>Upload a JPEG/PNG image and get a prediction from the local FastAPI server.</p>
+  </header>
+
+  <div class="card">
+    <div class="row">
+      <input id="file" type="file" accept="image/*" />
+      <button class="btn" id="btn">Predict</button>
+    </div>
+    <div id="status" class="result"></div>
+    <div id="top" class="result top"></div>
+    <div class="result">
+      <pre id="json">Waiting for prediction…</pre>
+    </div>
+  </div>
+
+  <script>
+    const file = document.getElementById('file');
+    const btn = document.getElementById('btn');
+    const jsonEl = document.getElementById('json');
+    const topEl = document.getElementById('top');
+    const statusEl = document.getElementById('status');
+
+    btn.addEventListener('click', async () => {
+      if (!file.files[0]) { alert('Choose an image first.'); return; }
+      btn.disabled = true;
+      statusEl.textContent = 'Uploading…';
+      topEl.textContent = '';
+      jsonEl.textContent = 'Waiting…';
+
+      try {
+        const fd = new FormData();
+        fd.append('file', file.files[0]);
+        const res = await fetch('/predict', { method: 'POST', body: fd });
+        const data = await res.json();
+        jsonEl.textContent = JSON.stringify(data, null, 2);
+        if (data && data.predictions && data.predictions.length) {
+          const best = data.predictions[0];
+          topEl.textContent = `Top prediction: ${best.class} (${(best.prob*100).toFixed(1)}%)`;
+        }
+        statusEl.textContent = res.ok ? 'Done' : 'Error';
+      } catch (e) {
+        statusEl.textContent = 'Request failed';
+        jsonEl.textContent = e.toString();
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

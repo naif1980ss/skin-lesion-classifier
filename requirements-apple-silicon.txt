@@ -1,0 +1,21 @@
+# Apple Silicon: GPU via Metal (TensorFlow 2.16.x)
+tensorflow-macos==2.16.2
+tensorflow-metal==1.1.0
+
+# Core libs aligned with TF 2.16.x
+keras>=3.0.0,<4
+ml-dtypes~=0.3.1
+tensorboard>=2.16,<2.17
+tensorboard-data-server>=0.7,<0.8
+
+# The rest
+fastapi==0.111.0
+uvicorn==0.30.1
+pillow==10.4.0
+numpy==1.26.4
+scikit-learn==1.5.1
+python-multipart==0.0.9
+opencv-python==4.10.0.84
+matplotlib==3.9.0
+pandas==2.2.2
+
