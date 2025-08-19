@@ -4,7 +4,11 @@ End‑to‑end: data prep → transfer learning (EfficientNetV2B0) → Grad‑CA
 
 > **Disclaimer**: This is a technical demo, **not** a medical device.
 
+
 ---
+
+## 📂 Repository Structure
+
 # 🩺 Skin Lesion Classifier (HAM10000 + Grad-CAM)
 
 A deep learning pipeline for **skin lesion classification** (benign vs malignant) using the [HAM10000 dataset](https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000).  
