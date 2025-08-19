@@ -5,6 +5,24 @@ End‑to‑end: data prep → transfer learning (EfficientNetV2B0) → Grad‑CA
 > **Disclaimer**: This is a technical demo, **not** a medical device.
 
 ---
+# 🩺 Skin Lesion Classifier (HAM10000 + Grad-CAM)
+
+A deep learning pipeline for **skin lesion classification** (benign vs malignant) using the [HAM10000 dataset](https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000).  
+Built with **TensorFlow 2.x**, trained on Apple Silicon (M1 GPU acceleration), and deployed via a **FastAPI inference server**.  
+
+## 🚀 Features
+- EfficientNetV2-B0 backbone (transfer learning).
+- Binary classification: `benign` vs `malignant`.
+- Training pipeline with `train.py`.
+- Evaluation scripts: confusion matrix + classification report.
+- Grad-CAM visualization to highlight regions influencing predictions.
+- REST API server powered by FastAPI.
+- Tested end-to-end on Apple M1 (Metal backend).
+
+---
+
+## 📂 Repository Structure
+
 
 ## 0) Quick start on a new iMac (Apple Silicon)
 
