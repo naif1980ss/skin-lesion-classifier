@@ -3,6 +3,15 @@
 A deep learning pipeline for skin lesion classification (benign vs malignant) using the HAM10000 dataset.
 Built with TensorFlow 2.x, trained on Apple Silicon (M1 GPU acceleration), and deployed via a FastAPI inference server.
 
+# 🩺 Skin Lesion Classifier (HAM10000 + Grad-CAM)
+
+![Python](https://img.shields.io/badge/python-3.11-blue.svg)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-green.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+A deep learning pipeline for **skin lesion classification**...
+
 
 
 
@@ -82,6 +91,7 @@ Run the FastAPI server:
 
 uvicorn main:app --reload
 
+This will start the server at: http://127.0.0.1:8000
 
 Open docs at:
 👉 http://127.0.0.1:8000/docs
@@ -91,7 +101,14 @@ Send an image for prediction:
 curl -X POST "http://127.0.0.1:8000/predict" \
   -F "file=@data/val/benign/sample.jpg"
 
-📈 Results
+📈 Example Response
+{
+  "predictions": [
+    {"class": "benign", "prob": 0.934},
+    {"class": "malignant", "prob": 0.066}
+  ]
+}
+
 
 Accuracy:
               precision    recall  f1-score   support
