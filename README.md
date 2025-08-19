@@ -106,7 +106,6 @@ weighted avg     0.7122    0.2896    0.2636      2003
 ![Confusion Matrix](eval/confusion_matrix.png)
 
 
-Confusion matrix + classification report available in eval/
 
 🛠️ Tech Stack
 
